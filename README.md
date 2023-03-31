@@ -14,7 +14,7 @@ My task is to write JavaScript code that analyzes the records to calculate each 
 
 
 ## Live URL
-TODO
+https://laszlosomogyimusic.github.io/Console-Finances/
 
 ## Usage
 The screenshots below was taken from Chrome, but Firefox and Edge works the same.
