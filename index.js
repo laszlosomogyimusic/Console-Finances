@@ -1,3 +1,4 @@
+//this is the given dataset we have to work with. It's a 2 dimensional array
 var finances = [
   ['Jan-2010', 867884],
   ['Feb-2010', 984655],
@@ -86,3 +87,49 @@ var finances = [
   ['Jan-2017', 138230],
   ['Feb-2017', 671099],
 ];
+
+var totalAmount = 0;
+var greatestIncreaseMonth = "";
+var greatestIncreaseAmount = 0;
+var greatestDecreaseMonth = "";
+var greatestDecreaseAmount = 0;
+var numberOfMonths = finances.length;
+var averageOfChanges = 0;
+
+for(var i=0; i<numberOfMonths; i++){
+  totalAmount = totalAmount + finances[i][1];
+
+  //make sure we're calculating from the second month, otherwise we get errors
+  if(i > 0) {
+    //keep tracking the profit change month to month
+    averageOfChanges += (finances[i][1] - finances[i-1][1]);
+
+    //finding the greatest increase month to month
+    if(finances[i][1] > greatestIncreaseAmount) {
+      //the increase must be a positive number so we have to use an absolute value.
+      //we get the difference of the current month's amount with the previous month
+      greatestIncreaseAmount = Math.abs(finances[i][1] - finances[i-1][1]);
+      greatestIncreaseMonth = finances[i][0];
+    }
+
+    //finding the greatest decrease month to month
+    if(finances[i][1] < greatestDecreaseAmount) {
+      //the decrease is a negative number
+      //we get the difference of the current month's amount with the previous month
+      greatestDecreaseAmount = finances[i][1] - finances[i-1][1];
+      greatestDecreaseMonth = finances[i][0];
+    }
+  }
+}
+
+//this is a given equation, this is how we calculate the average of the changes in Profit/Losses over the entire period
+averageOfChanges = averageOfChanges / (numberOfMonths - 1);
+
+console.log("Financial Analysis");
+console.log("----------------------------");
+console.log("Total Months: " + numberOfMonths);
+console.log("Total: $" + totalAmount);
+console.log("Average Change: " + averageOfChanges.toFixed(2)); //This rounds the value to 2 decimals
+console.log("Greatest Increase in Profits/Losses: " + greatestIncreaseMonth + " ($" + greatestIncreaseAmount + ")");
+console.log("Greatest Decrease in Profits/Losses: " + greatestDecreaseMonth + " ($" + greatestDecreaseAmount + ")");
+
